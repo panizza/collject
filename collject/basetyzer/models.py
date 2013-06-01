@@ -57,7 +57,7 @@ class Project(models.Model):
     skill = models.ManyToManyField(Skill)
     latitude = models.FloatField(null=True,blank=True)
     longitude = models.FloatField(null=True,blank=True)
-    city = property(get_city())
+    city = property(_get_city())
     solution = models.ForeignKey(Solution)
     user = models.ForeignKey(User)
     follower = models.ManyToManyField(User, related_name="projectfollower", default=[], blank=True)
