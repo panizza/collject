@@ -5,4 +5,5 @@ from basetyzer.models import Project, Problem, Solution
 admin.site.register(Project)
 admin.site.register(Problem)
 admin.site.register(Solution)
+admin.site.register(Skill)
 
