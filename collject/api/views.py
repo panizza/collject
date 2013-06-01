@@ -85,6 +85,7 @@ def list_follower_of_problem(request, problem_id):
 
 @ajax(require="POST")
 def search_project_from_skill(request, project_id):
+    print request.POST
     skills = ['carpentiere', 'JAVA']
     project = get_object_or_404(Project, pk=project_id)
     return encode_json(Project.objects.filter(skill__title__in=skills).values())
