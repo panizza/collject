@@ -85,8 +85,8 @@ def list_follower_of_problem(request, problem_id):
     return encode_json(flws.values('id', 'email'))
 
 
-@csrf_exempt
 @ajax(require="POST")
+@csrf_exempt
 def search_project_from_skill(request):
     print request.POST
     skills = ['carpentiere', 'JAVA']
