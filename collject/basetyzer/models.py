@@ -40,9 +40,9 @@ class Project(models.Model):
 	creation_date = models.DateTimeField(auto_now_add=True)
 	description = models.TextField()
 	skill = models.ManyToManyField(Skill)
-	altitude = models.DecimalField()
-	latitude = models.DecimalField()
-	longitude = models.DecimalField()
+	altitude = models.FloatField()
+	latitude = models.FloatField()
+	longitude = models.FloatField()
 	solution = models.ForeignKey(Solution)
 
 
