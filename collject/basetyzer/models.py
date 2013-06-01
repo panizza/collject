@@ -49,8 +49,7 @@ class Project(models.Model):
 	def __unicode__(self):
 		return "%s" % self.title
 
-
- def create_profile(sender, instance, created, **kwargs):
+def create_profile(sender, instance, created, **kwargs):
     if created:
         profile, created = UserProfile.objects.get_or_create(user=instance)
 
