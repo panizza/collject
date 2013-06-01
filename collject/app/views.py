@@ -6,7 +6,7 @@ def index(request):
 
 
 
-lista di tutti i problemi ordinata per follower
+"""lista di tutti i problemi ordinata per follower
 lista di tutti i progetti ordinata per follower
 lista di tutte le soluzioni ordinata per +1
 
@@ -17,4 +17,4 @@ dato un utente
 
 progetti -> lista di followers
 idee -> lista di user che hanno fatto +1
-problemi -> lista di follower
+problemi -> lista di follower"""

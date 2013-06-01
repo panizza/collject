@@ -9,8 +9,7 @@ class Problem(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
     creation_date = models.DateTimeField(auto_now_add=True)
-    follower = models.ManyToManyField(User)
-    date_last_update = models.DateTimeField(null=True, blank=True, editable=False)
+    follower = models.ManyToManyField(User, related_name="problemfollower")
 
     class Meta:
         get_latest_by = "creation_date"
@@ -24,7 +23,7 @@ class Solution(models.Model):
     description = models.TextField()
     creation_date = models.DateTimeField(auto_now_add=True)
     problem = models.ForeignKey(Problem)
-    follower = models.ManyToManyField(User)
+    follower = models.ManyToManyField(User,related_name="solutionfollower")
 
     def __unicode__(self):
         return "%s" % self.description[:25]
@@ -56,7 +55,7 @@ class Project(models.Model):
     longitude = models.FloatField()
     solution = models.ForeignKey(Solution)
     user = models.ForeignKey(User)
-    follower = models.ManyToManyField(User)
+    follower = models.ManyToManyField(User,related_name="projectfollower")
 
     def __unicode__(self):
         return "%s" % self.title
