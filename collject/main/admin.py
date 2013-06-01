@@ -1,5 +1,5 @@
 from django.contrib import admin
-from basetyzer.models import Project, Problem, Solution
+from basetyzer.models import Project, Problem, Solution, Skill
 
 #add MyGroup to /admin
 admin.site.register(Project)
