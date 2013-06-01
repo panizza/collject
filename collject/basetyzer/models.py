@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.dispatch import receiver
 from django.db.models.signals import post_save
-from .helpers import get_city_name
+from api.helpers import get_city_name
 
 class Problem(models.Model):
     owner = models.ForeignKey(User)
