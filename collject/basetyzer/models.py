@@ -1,4 +1,7 @@
 from django.db import models
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+
 
 class Problem(models.Model):
 	title = models.CharField(max_length=100)
@@ -31,12 +34,6 @@ class UserProfile(models.Model):
 	def __unicode__(self):
 		return "%s" % self.description[:25]
 
-	def create_profile(sender, instance, created, **kwargs):
-	    if created:
-	        profile, created = UserProfile.\
-	                 objects.get_or_create(user=instance)
-			post_save.connect(create_profile, sender=User)
-
 
 class Project(models.Model):
 	title = models.CharField(max_length=100)
@@ -52,5 +49,10 @@ class Project(models.Model):
 	def __unicode__(self):
 		return "%s" % self.title
 
- 
+
+ def create_profile(sender, instance, created, **kwargs):
+    if created:
+        profile, created = UserProfile.objects.get_or_create(user=instance)
+
+post_save.connect(create_profile, sender=User)
 
