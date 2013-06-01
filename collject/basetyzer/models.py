@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth.models import AbstractBaseUser
 
 class Problem(models.Model):
 	title = models.CharField(max_length=100)
@@ -25,14 +25,13 @@ class Skill(models.Model):
 		return "%s" % self.title
 
 
-class MyUser(models.Model):
+class MyUser(AbstractBaseUser):
 	skills = models.ManyToManyField(Skill)
+
+
 
 	def __unicode__(self):
 		return "%s" % self.description[:25]
-
-
-
 
 
 class Project(models.Model):
