@@ -12,4 +12,6 @@ if settings.DEBUG:
 
 urlpatterns += (
     url(r'', include('app.urls')),
+    url(r'^admin/', include(admin.site.urls)),
+
 )
