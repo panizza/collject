@@ -10,7 +10,7 @@ urlpatterns = patterns('api.views',
                        url(r'^project/list/$', 'list_project', name='list_project'),
                        url(r'^project/(?P<project_id>\d+)/info/$', 'get_project_info', name='get_project_info'),
                        url(r'^project/(?P<project_id>\d+)/follower/$', 'list_follower_of_project', name='list_follower_of_project'),
-                       url(r'^project/(?P<project_id>\d+)/search/$', 'list_follower_of_project', name='list_follower_of_project'),
+                       url(r'^project/search/$', 'list_follower_of_project', name='list_follower_of_project'),
 
                        url(r'^solution/list/$', 'list_solution', name='list_solution'),
                        url(r'^solution/(?P<solution_id>\d+)/info/$', 'get_solution_info', name='get_solution_info'),
