@@ -7,6 +7,8 @@ from django.db.models import Count, Q
 from django.forms.models import model_to_dict
 from .helpers import encode_json, _my_json_encoder
 import json
+from django.views.decorators.csrf import csrf_exempt
+
 
 @ajax(require="GET")
 def list_problem(request):
@@ -83,6 +85,7 @@ def list_follower_of_problem(request, problem_id):
     return encode_json(flws.values('id', 'email'))
 
 
+@csrf_exempt
 @ajax(require="POST")
 def search_project_from_skill(request):
     print request.POST
