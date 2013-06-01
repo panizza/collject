@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from basetyzer.models import Problem, Project, Solution
 from django.db.models import Count
-from .helpers import MyJsonEncoder
+from .helpers import my_json_encoder
 import json 
 
 def index(request):
@@ -26,5 +26,5 @@ problemi -> lista di follower"""
 
 def list_project(request):
 	prjs = Project.objects.annotate(follower_count=Count("follower")).order_by("-follower_count").values()
-	print json.dumps(prjs,cls=MyJsonEncoder)
+	print json.dumps(prjs, default=my_json_encoder)
 

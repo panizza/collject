@@ -1,8 +1,11 @@
 import json
 import datetime
 
-class MyJsonEncoder(json.JSONEncoder):
-    def default(self, obj):
-        if isinstance(obj, datetime.datetime):
-            return datetime.strptime(obj, '%Y-%m-%d %H:%M:%S')
-        return json.JSONEncoder.default(self,obj)
+
+def my_json_encoder(obj,format):
+	for k,v in obj.items():
+		if isinstance(v, dict):
+			MyJsonEncoder(v,format)
+    	elif isinstance(v, datetime.datetime):
+        	obj[k] = datetime.strptime(v, format)
+    return obj;
