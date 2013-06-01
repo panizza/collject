@@ -1,10 +1,9 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser
 
 class Problem(models.Model):
 	title = models.CharField(max_length=100)
 	description = models.TextField()
-	creation_date = models.DateTimeField(auto_add_now=True)
+	creation_date = models.DateTimeField(auto_now_add=True)
 
 	def __unicode__(self):
 		return "%s" % self.title
@@ -12,7 +11,7 @@ class Problem(models.Model):
 
 class Solution(models.Model):
 	description = models.TextField()
-	creation_date = models.DateTimeField(auto_add_now=True)
+	creation_date = models.DateTimeField(auto_now_add=True)
 	problem = models.ForeignKey(Problem)
 
 	def __unicode__(self):
@@ -25,18 +24,23 @@ class Skill(models.Model):
 		return "%s" % self.title
 
 
-class MyUser(AbstractBaseUser):
+class UserProfile(models.Model):
+	user = models.OneToOneField(User,unique=True)
 	skills = models.ManyToManyField(Skill)
-
-
 
 	def __unicode__(self):
 		return "%s" % self.description[:25]
 
+	def create_profile(sender, instance, created, **kwargs):
+	    if created:
+	        profile, created = UserProfile.\
+	                 objects.get_or_create(user=instance)
+			post_save.connect(create_profile, sender=User)
+
 
 class Project(models.Model):
 	title = models.CharField(max_length=100)
-	creation_date = models.DateTimeField(auto_add_now=True)
+	creation_date = models.DateTimeField(auto_now_add=True)
 	description = models.TextField()
 	skill = models.ManyToManyField(Skill)
 	altitude = models.DecimalField()

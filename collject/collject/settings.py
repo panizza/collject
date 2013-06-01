@@ -157,4 +157,4 @@ LOGGING = {
     }
 }
 
-AUTH_USER_MODEL = 'basetyzer.MyUser'
+AUTH_PROFILE_MODULE = 'basetyzer.UserProfile'
