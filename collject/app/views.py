@@ -1,4 +1,8 @@
 from django.shortcuts import render, get_object_or_404
+from basetyzer.models import Problem, Project, Solution
+from django.db.models import Count
+from .helpers import MyJsonEncoder
+import json 
 
 def index(request):
     return render(request, "app/index.html")
@@ -18,3 +22,9 @@ dato un utente
 progetti -> lista di followers
 idee -> lista di user che hanno fatto +1
 problemi -> lista di follower"""
+
+
+def list_project(request):
+	prjs = Project.objects.annotate(follower_count=Count("follower")).order_by("-follower_count").values()
+	print json.dumps(prjs,cls=MyJsonEncoder)
+
