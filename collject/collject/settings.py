@@ -26,6 +26,8 @@ ROOT_PATH = abspath(dirname(__file__))
 PROJECT_NAME = basename(ROOT_PATH)
 SETTINGS_PATH = dirname(__file__)
 
+DEFAULT_CHARSET = 'utf-8'
+
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = []

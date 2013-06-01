@@ -4,10 +4,13 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from ajaxutils.decorators import ajax
 from django.db.models import Count, Q
+from django.http import QueryDict
 from django.forms.models import model_to_dict
-from .helpers import encode_json, _my_json_encoder
-import json
+from .helpers import encode_json, _my_json_encoder,get_city_names
 from django.views.decorators.csrf import csrf_exempt
+import json
+import requests
+
 
 
 @ajax(require="GET")
@@ -91,3 +94,11 @@ def search_project_from_skill(request):
     print request.POST
     skills = ['carpentiere', 'JAVA']
     return encode_json(Project.objects.filter(skill__title__in=skills).values())
+
+@ajax(require="POST")
+@csrf_exempt
+def search_project_from_position(request):
+    print request.POST
+    pos = QueryDict(request.POST).list()
+    city= get_city_names(pos['lat'],pos['lng']);
+    return encode_json(Project.objects.filter(city=city));

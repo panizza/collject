@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.dispatch import receiver
 from django.db.models.signals import post_save
-
+from .helpers import get_city_name
 
 class Problem(models.Model):
     owner = models.ForeignKey(User)
@@ -57,9 +57,13 @@ class Project(models.Model):
     skill = models.ManyToManyField(Skill)
     latitude = models.FloatField(null=True,blank=True)
     longitude = models.FloatField(null=True,blank=True)
+    city = property(get_city())
     solution = models.ForeignKey(Solution)
     user = models.ForeignKey(User)
     follower = models.ManyToManyField(User, related_name="projectfollower", default=[], blank=True)
+
+    def _get_city(self):
+        return get_city_name(self.latitude,self.longitude)
 
     def __unicode__(self):
         return "%s" % self.title
