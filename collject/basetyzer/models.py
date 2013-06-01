@@ -29,10 +29,10 @@ class Skill(models.Model):
 
 class UserProfile(models.Model):
 	user = models.OneToOneField(User,unique=True)
-	image = models.ImageField(upload_to="images/user/")
+	image = models.ImageField(upload_to="images/user/",null=True)
 	skills = models.ManyToManyField(Skill)
-	latitude = models.FloatField()
-	longitude = models.FloatField()
+	latitude = models.FloatField(null=True)
+	longitude = models.FloatField(null=True)
 
 	def __unicode__(self):
 		return "%s" % self.description[:25]
