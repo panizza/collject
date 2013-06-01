@@ -39,8 +39,8 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User,unique=True)
     image = models.ImageField(upload_to="images/user/",null=True)
     skills = models.ManyToManyField(Skill)
-    latitude = models.FloatField(null=True)
-    longitude = models.FloatField(null=True)
+    latitude = models.FloatField(null=True,blank=True)
+    longitude = models.FloatField(null=True,blank=True)
 
     def get_image_url(self):
         return self.image if self.image else ""
@@ -55,8 +55,8 @@ class Project(models.Model):
     creation_date = models.DateTimeField(auto_now_add=True)
     description = models.TextField()
     skill = models.ManyToManyField(Skill)
-    latitude = models.FloatField()
-    longitude = models.FloatField()
+    latitude = models.FloatField(null=True,blank=True)
+    longitude = models.FloatField(null=True,blank=True)
     solution = models.ForeignKey(Solution)
     user = models.ForeignKey(User)
     follower = models.ManyToManyField(User,related_name="projectfollower", default=[],blank=True)

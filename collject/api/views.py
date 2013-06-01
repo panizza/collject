@@ -30,9 +30,9 @@ def get_solution_of_problem(request, problem_id):
 @ajax(require="GET")
 def list_project(request):
     prjs = Project.objects.annotate(follower_count=Count("follower")).order_by("-follower_count").values()
-    json_out = encode_json(prjs.values('id', 'title', 'description', 'follower_count', 'creation_date', 'latitude', 'longitude'))
+    json_out = encode_json(prjs.values('id', 'title', 'description', 'user', 'follower_count', 'creation_date', 'latitude', 'longitude'))
     for obj in json_out:
-        obj['img'] = User.objects.get(pk=obj['owner_id']).get_profile().get_image_url()
+        obj['img'] = User.objects.get(pk=obj['user']).get_profile().get_image_url()
     return json_out
 
 
