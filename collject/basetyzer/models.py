@@ -42,6 +42,10 @@ class UserProfile(models.Model):
     latitude = models.FloatField(null=True)
     longitude = models.FloatField(null=True)
 
+    def get_image_url(self):
+        return self.image if self.image else ""
+
+
     def __unicode__(self):
         return "%s" % self.description[:25]
 
