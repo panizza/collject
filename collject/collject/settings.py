@@ -155,3 +155,5 @@ LOGGING = {
         },
     }
 }
+
+AUTH_USER_MODEL = 'basetyzer.MyUser'
