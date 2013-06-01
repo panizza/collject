@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.dispatch import receiver
 from django.db.models.signals import post_save
-from api.helpers import get_city_name
+from api.helpers import get_city_names
 
 class Problem(models.Model):
     owner = models.ForeignKey(User)
@@ -63,7 +63,7 @@ class Project(models.Model):
     follower = models.ManyToManyField(User, related_name="projectfollower", default=[], blank=True)
 
     def _get_city(self):
-        return get_city_name(self.latitude,self.longitude)
+        return get_city_names(self.latitude,self.longitude)
 
     def __unicode__(self):
         return "%s" % self.title

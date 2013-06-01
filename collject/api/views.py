@@ -6,7 +6,7 @@ from ajaxutils.decorators import ajax
 from django.db.models import Count, Q
 from django.http import QueryDict
 from django.forms.models import model_to_dict
-from .helpers import encode_json, _my_json_encoder,get_city_names
+from .helpers import encode_json, _my_json_encoder, get_city_names
 from django.views.decorators.csrf import csrf_exempt
 import json
 import requests
