@@ -11,8 +11,8 @@ if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT, show_indexes=True)
 
 urlpatterns += (
-    url(r'api/', include('app.urls')),
     url(r'', include('main.urls')),
+    url(r'api/', include('api.urls')),
     url(r'^admin/', include(admin.site.urls)),
 
 )
