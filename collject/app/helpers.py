@@ -7,5 +7,5 @@ def my_json_encoder(obj,format):
 		if isinstance(v, dict):
 			my_json_encoder(v,format)
 		elif isinstance(v, datetime.datetime):
-			obj[k] = datetime.strptime(v, format)
+			obj[k] = datetime.datetime.strptime(v, format)
 	return obj;
