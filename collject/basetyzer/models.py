@@ -1,21 +1,30 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.dispatch import receiver
 from django.db.models.signals import post_save
 
 
 class Problem(models.Model):
+    owner = models.ForeignKey(User)
     title = models.CharField(max_length=100)
     description = models.TextField()
     creation_date = models.DateTimeField(auto_now_add=True)
+    follower = models.ManyToManyField(User)
+    date_last_update = models.DateTimeField(null=True, blank=True, editable=False)
+
+    class Meta:
+        get_latest_by = "creation_date"
 
     def __unicode__(self):
         return "%s" % self.title
 
 
 class Solution(models.Model):
+    user = models.ForeignKey(User)
     description = models.TextField()
     creation_date = models.DateTimeField(auto_now_add=True)
     problem = models.ForeignKey(Problem)
+    follower = models.ManyToManyField(User)
 
     def __unicode__(self):
         return "%s" % self.description[:25]
@@ -46,14 +55,24 @@ class Project(models.Model):
     latitude = models.FloatField()
     longitude = models.FloatField()
     solution = models.ForeignKey(Solution)
-
+    user = models.ForeignKey(User)
+    follower = models.ManyToManyField(User)
 
     def __unicode__(self):
         return "%s" % self.title
 
-def create_profile(sender, instance, created, **kwargs):
-    if created:
-        profile, created = UserProfile.objects.get_or_create(user=instance)
 
-post_save.connect(create_profile, sender=User)
+#@receiver(post_save, sender=Solution)
+#def post_save_do_stuff(sender, **kwargs):
+#    """ Calls the do_stuff function on the saved instance if it was
+#        just created
+#    """
+#    if kwargs['created']:
+#        kwargs['instance']._do_stuff()
 
+
+@receiver(post_save, sender=User)
+def post_save_user_stuff(sender, **kwargs):
+    if kwargs['created']:
+        user = kwargs['instance']
+        profile, created = UserProfile.objects.get_or_create(user=user)
