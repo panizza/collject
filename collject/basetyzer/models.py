@@ -23,7 +23,7 @@ class Solution(models.Model):
     description = models.TextField()
     creation_date = models.DateTimeField(auto_now_add=True)
     problem = models.ForeignKey(Problem)
-    follower = models.ManyToManyField(User,related_name="solutionfollower", default=[],blank=True)
+    follower = models.ManyToManyField(User, related_name="solutionfollower", default=[], blank=True)
 
     def __unicode__(self):
         return "%s" % self.description[:25]
@@ -36,18 +36,18 @@ class Skill(models.Model):
 
 
 class UserProfile(models.Model):
-    user = models.OneToOneField(User,unique=True)
-    image = models.ImageField(upload_to="images/user/",null=True)
+    user = models.OneToOneField(User, unique=True)
+    image = models.ImageField(upload_to="images/user/", null=True)
     skills = models.ManyToManyField(Skill)
-    latitude = models.FloatField(null=True,blank=True)
-    longitude = models.FloatField(null=True,blank=True)
+    latitude = models.FloatField(null=True, blank=True)
+    longitude = models.FloatField(null=True, blank=True)
 
     def get_image_url(self):
         return self.image if self.image else ""
 
 
     def __unicode__(self):
-        return "%s" % self.description[:25]
+        return "%s" % self.user.username
 
 
 class Project(models.Model):
@@ -59,7 +59,7 @@ class Project(models.Model):
     longitude = models.FloatField(null=True,blank=True)
     solution = models.ForeignKey(Solution)
     user = models.ForeignKey(User)
-    follower = models.ManyToManyField(User,related_name="projectfollower", default=[],blank=True)
+    follower = models.ManyToManyField(User, related_name="projectfollower", default=[], blank=True)
 
     def __unicode__(self):
         return "%s" % self.title

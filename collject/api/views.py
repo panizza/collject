@@ -30,7 +30,7 @@ def get_solution_of_problem(request, problem_id):
 @ajax(require="GET")
 def list_project(request):
     prjs = Project.objects.annotate(follower_count=Count("follower")).order_by("-follower_count").values()
-    json_out = encode_json(prjs.values('id', 'title', 'description', 'user', 'follower_count', 'creation_date', 'latitude', 'longitude'))
+    json_out = encode_json(prjs.values('id', 'title', 'user', 'description', 'follower_count', 'creation_date', 'latitude', 'longitude'))
     for obj in json_out:
         obj['img'] = User.objects.get(pk=obj['user']).get_profile().get_image_url()
     return json_out
@@ -75,9 +75,16 @@ def list_follower_of_solution(request, solution_id):
     flws = sol.follower.all().values()
     return encode_json(flws.values('id', 'email'))
 
+
 @ajax(require="GET")
 def list_follower_of_problem(request, problem_id):
     prob = get_object_or_404(Problem, pk=problem_id)
     flws = prob.follower.all().values()
     return encode_json(flws.values('id', 'email'))
 
+
+@ajax(require="POST")
+def search_project_from_skill(request, project_id):
+    skills = ['carpentiere', 'JAVA']
+    project = get_object_or_404(Project, pk=project_id)
+    return encode_json(Project.objects.filter(skill__title__in=skills).values())
