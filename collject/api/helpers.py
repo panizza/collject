@@ -3,7 +3,7 @@ import datetime
 
 
 def encode_json(obj):
-    return json.dumps([_my_json_encoder(cc) for cc in obj])
+    return [_my_json_encoder(cc) for cc in obj]
 
 
 def _my_json_encoder(obj, format="%Y-%m-%d %H:%M:%S"):
