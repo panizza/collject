@@ -14,7 +14,7 @@ function listProblems(url, type) {
     /* http://23.21.187.163/api/problem/list/ */
 
     $.ajax({
-            url: '',
+            url: url,
             type: "GET",
             data: "",
             dataType: 'json',
@@ -29,7 +29,7 @@ function listProblems(url, type) {
                             str += '<h2 class="link" rel="' + j[i].id + ']" type="[' + type + '">' + j[i].title + '</h2>';
                             str += '<span class="skills">' + j[i].hashtag + '</span>';
                             str += '</section>';
-                            str +=  '<span class="icon">&#10003;</span></section>';
+                            str +=  '<span class="follow icon">&#10003;</span></section>';
 
 
 
