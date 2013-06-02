@@ -99,7 +99,6 @@ def search_project_from_skill(request):
 @csrf_exempt
 def search_project_from_position(request):
     print request.POST
-    q = QueryDict(request.POST)
-    pos = q.dict()
+    q = json.load(request.POST)
     city= get_city_names(pos['lat'],pos['lng'])
     return encode_json(Project.objects.filter(city=city));
