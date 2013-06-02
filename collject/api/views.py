@@ -31,6 +31,14 @@ def get_problem_info(request, problem_id):
     return _my_json_encoder(model_to_dict(prob))
 
 
+@ajax(require="POST")
+@csrf_exempt
+def search_problem_from_hashtag(request):
+    json_in =json.loads(json.dumps(request.POST))
+    skills = json_in['hashtag'].split(',')
+    return encode_json(Problem.objects.filter(reduce(operator.or_, (Q(hashtag=x) for x in skills))).values())
+
+
 @ajax(require="GET")
 def get_solution_of_problem(request, problem_id):
     prob = get_object_or_404(Problem, pk=problem_id)
