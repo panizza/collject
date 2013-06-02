@@ -95,9 +95,14 @@ def search_project_from_skill(request):
     skills = ['carpentiere', 'JAVA']
     return encode_json(Project.objects.filter(skill__title__in=skills).values())
 
+
 @ajax(require="POST")
 @csrf_exempt
 def search_project_from_position(request):
-    print request.POST
-    city= get_city_names(request.POST['lat'],request.POST['lng'])
-    return encode_json(Project.objects.filter(city=city));
+    lat = request.POST.get('lat', None)
+    lon = request.POST.get('lng', None)
+    if lat and lon:
+        city = get_city_names(lat, lon)
+        return encode_json(Project.objects.filter(city=city).values())
+    else:
+        return encode_json([])
