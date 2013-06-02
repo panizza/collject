@@ -10,7 +10,7 @@ from .helpers import encode_json, _my_json_encoder, get_city_names
 from django.views.decorators.csrf import csrf_exempt
 import json
 import requests
-
+import operator
 
 
 @ajax(require="GET")
@@ -35,6 +35,7 @@ def get_problem_info(request, problem_id):
 @csrf_exempt
 def search_problem_from_hashtag(request):
     json_in =json.loads(json.dumps(request.POST))
+    print json_in
     skills = json_in['hashtag'].split(',')
     return encode_json(Problem.objects.filter(reduce(operator.or_, (Q(hashtag=x) for x in skills))).values())
 
