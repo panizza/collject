@@ -38,7 +38,7 @@ class Skill(models.Model):
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, unique=True)
-    image = models.ImageField(upload_to="images/user/", null=True)
+    image = models.ImageField(upload_to="images/user/", null=True,blank=True)
     skills = models.ManyToManyField(Skill)
     latitude = models.FloatField(null=True, blank=True)
     longitude = models.FloatField(null=True, blank=True)
