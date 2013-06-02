@@ -16,7 +16,10 @@ import requests
 @ajax(require="GET")
 def list_problem(request):
     prbs = Problem.objects.annotate(follower_count=Count("follower")).order_by("-follower_count")
-    return encode_json(prbs.values('id', 'title', 'description', 'follower_count'))
+    json_out = encode_json(prbs.values('id', 'title', 'description', 'follower_count','owner'))
+    for obj in json_out:
+        obj['img'] = User.objects.get(pk=obj['owner']).get_profile().get_image_data_uri()
+    return json_out
 
 
 @ajax(require="GET")
@@ -37,7 +40,7 @@ def list_project(request):
     prjs = Project.objects.annotate(follower_count=Count("follower")).order_by("-follower_count").values()
     json_out = encode_json(prjs.values('id', 'title', 'user', 'description', 'follower_count', 'creation_date', 'latitude', 'longitude'))
     for obj in json_out:
-        obj['img'] = User.objects.get(pk=obj['user']).get_profile().get_image_url()
+        obj['img'] = User.objects.get(pk=obj['user']).get_profile().get_image_data_uri()
     return json_out
 
 
@@ -50,7 +53,10 @@ def get_project_info(request, project_id):
 @ajax(require="GET")
 def list_solution(request):
     sols = Solution.objects.annotate(follower_count=Count("follower")).order_by("-follower_count")
-    return encode_json(sols.values('id', 'problem_id', 'description', 'follower_count', 'creation_date'))
+    json_out = encode_json(sols.values('id', 'problem_id', 'user', 'description', 'follower_count', 'creation_date'))
+    for obj in json_out:
+        obj['img'] = User.objects.get(pk=obj['user']).get_profile().get_image_data_uri()
+    return json_out
 
 
 @ajax(require="GET")
@@ -64,7 +70,10 @@ def get_solution_info(request, solution_id):
 def list_my_project(request):
     user = get_object_or_404(User, pk=request.user.id)
     prjs = Project.objects.filter(Q(user=user)|Q(follower__in=[user]))
-    return encode_json(prjs.values('id', 'title', 'description', 'follower_count', 'creation_date'))
+    json_out = encode_json(prjs.values('id', 'title', 'user', 'description', 'follower_count', 'creation_date', 'latitude', 'longitude'))
+    for obj in json_out:
+        obj['img'] = user.get_profile().get_image_data_uri()
+    return json_out
 
 
 @ajax(require="GET")

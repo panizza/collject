@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 from django.dispatch import receiver
 from django.db.models.signals import post_save
 from api.helpers import get_city_names
+from base64 import b64encode
+
 
 class Problem(models.Model):
     owner = models.ForeignKey(User)
@@ -45,6 +47,16 @@ class UserProfile(models.Model):
 
     def get_image_url(self):
         return self.image if self.image else ""
+
+    def get_image_data_uri(self, mime=None):
+        if self.image:
+            with open(self.image.path, "rb") as file:
+                data = file.read()
+            encoded = b64encode(data)
+            mime = mime + ";" if mime else ";"
+            return "data:%sbase64,%s" % (mime, encoded)
+        else:
+            return ""
 
 
     def __unicode__(self):
