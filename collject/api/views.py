@@ -111,10 +111,5 @@ def search_project_from_position(request):
 @ajax(require="POST")
 @csrf_exempt
 def search_problem_from_position(request):
-    lat = request.POST.get('lat', None)
-    lon = request.POST.get('lng', None)
-    if lat and lon:
-        city = get_city_names(lat, lon)
-        return encode_json(Problem.objects.filter(city=city).values())
-    else:
-        return encode_json([])
+    city = request.POST.get('city', None)
+    return encode_json(Problem.objects.filter(city=city).values()) if city else encode_json([])

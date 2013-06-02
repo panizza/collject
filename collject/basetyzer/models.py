@@ -10,11 +10,7 @@ class Problem(models.Model):
     description = models.TextField()
     creation_date = models.DateTimeField(auto_now_add=True)
     follower = models.ManyToManyField(User, related_name="problemfollower", default=[],blank=True)
-    city =models.TextField(null=True,blank=True)
-
-    def save(self):
-        self.city = get_city_names(self.latitude,self.longitude)
-        super(Problem, self).save()
+    city = models.TextField()
 
     class Meta:
         get_latest_by = "creation_date"
