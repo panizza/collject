@@ -92,7 +92,7 @@ def list_follower_of_problem(request, problem_id):
 @csrf_exempt
 def search_project_from_skill(request):
     print request.POST
-    print json.loads(request.POST)
+    print json.loads(json.dumps(request.POST))
     skills = ['carpentiere', 'JAVA']
     return encode_json(Project.objects.filter(skill__title__in=skills).values())
 
