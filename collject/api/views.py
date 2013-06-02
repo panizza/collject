@@ -43,7 +43,10 @@ def list_project(request):
     prjs = Project.objects.annotate(follower_count=Count("follower")).order_by("-follower_count").values()
     json_out = encode_json(prjs.values('id', 'title', 'user', 'description', 'follower_count', 'creation_date', 'latitude', 'longitude'))
     for obj in json_out:
-        obj['img'] = User.objects.get(pk=obj['user']).get_profile().get_image_data_uri()
+        user = User.objects.get(pk=obj['user'])
+        obj['user'] = model_to_dict(user, fields=['usermame', 'id', 'email'])
+        obj['user']['img'] = user.get_profile().get_image_data_uri()
+        obj['user']['skills'] = encode_json(user.get_profile().skills.values())
     return json_out
 
 
@@ -58,7 +61,10 @@ def list_solution(request):
     sols = Solution.objects.annotate(follower_count=Count("follower")).order_by("-follower_count")
     json_out = encode_json(sols.values('id', 'problem_id', 'user', 'description', 'follower_count', 'creation_date'))
     for obj in json_out:
-        obj['img'] = User.objects.get(pk=obj['user']).get_profile().get_image_data_uri()
+        user = User.objects.get(pk=obj['user'])
+        obj['user'] = model_to_dict(user, fields=['usermame', 'id', 'email'])
+        obj['user']['img'] = user.get_profile().get_image_data_uri()
+        obj['user']['skills'] = encode_json(user.get_profile().skills.values())
     return json_out
 
 
@@ -75,7 +81,10 @@ def list_my_project(request):
     prjs = Project.objects.filter(Q(user=user)|Q(follower__in=[user]))
     json_out = encode_json(prjs.values('id', 'title', 'user', 'description', 'follower_count', 'creation_date', 'latitude', 'longitude'))
     for obj in json_out:
-        obj['img'] = user.get_profile().get_image_data_uri()
+        user = User.objects.get(pk=obj['user'])
+        obj['user'] = model_to_dict(user, fields=['usermame', 'id', 'email'])
+        obj['user']['img'] = user.get_profile().get_image_data_uri()
+        obj['user']['skills'] = encode_json(user.get_profile().skills.values())
     return json_out
 
 
