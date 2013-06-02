@@ -13,12 +13,12 @@ def _my_json_encoder(obj, format="%Y-%m-%d %H:%M:%S"):
         elif isinstance(v, datetime.datetime):
             obj[k] = v.strftime(format)
     return obj
-    
+
 #NEEDS Huge improvement
 def get_city_names(lat,lon):
     #for now we let user filled here
     prs={'lat':lat,'lng':lon,'username':'rhok2013'}
-    r = requests.get('ttp://api.geonames.org/findNearbyPlaceNameJSON',params=prs);
+    r = requests.get('http://api.geonames.org/findNearbyPlaceNameJSON',params=prs);
     json_in = r.json()
     geoname = json_in['geonames'][0]
     return geoname['toponymName']
