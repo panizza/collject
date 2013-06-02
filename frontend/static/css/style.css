@@ -5,7 +5,8 @@
 
 @font-face {
     font-family: 'Entypo';
-    src: url(./Entypo.otf);
+    src: url(./Entypo.otf),
+         url(Entypo.ttf);
 }
 
 @font-face {
@@ -90,6 +91,7 @@ header #bottom nav ul {
     padding: 0;
     margin: 0;
     height: 4.4rem;
+    width: 18.8rem;
     width: -webkit-calc(100% - 13.2rem);
     width: calc(100% - 13.2rem);
     position: relative;
@@ -257,3 +259,7 @@ section aside {
 .list section .icon.follow {
     color: #3E7300;
 }
+
+/*.list {
+    display: none;
+}*/
