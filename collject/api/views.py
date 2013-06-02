@@ -10,7 +10,7 @@ from .helpers import encode_json, _my_json_encoder, get_city_names
 from django.views.decorators.csrf import csrf_exempt
 import json
 import requests
-
+import operator
 
 
 @ajax(require="GET")
@@ -29,6 +29,15 @@ def list_problem(request):
 def get_problem_info(request, problem_id):
     prob = get_object_or_404(Problem, pk=problem_id)
     return _my_json_encoder(model_to_dict(prob))
+
+
+@ajax(require="POST")
+@csrf_exempt
+def search_problem_from_hashtag(request):
+    json_in =json.loads(json.dumps(request.POST))
+    print json_in
+    skills = json_in['hashtag'].split(',')
+    return encode_json(Problem.objects.filter(reduce(operator.or_, (Q(hashtag=x) for x in skills))).values())
 
 
 @ajax(require="GET")
@@ -136,3 +145,9 @@ def search_project_from_position(request):
 def search_problem_from_position(request):
     city = request.POST.get('city', None)
     return encode_json(Problem.objects.filter(city=city).values()) if city else encode_json([])
+
+
+@ajax(require="GET")
+def image_from_user(request, user_id):
+    user = get_object_or_404(User, pk=user_id)
+    return {'img':user.get_profile().get_image_data_uri()}
