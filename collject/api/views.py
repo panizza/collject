@@ -16,9 +16,12 @@ import operator
 @ajax(require="GET")
 def list_problem(request):
     prbs = Problem.objects.annotate(follower_count=Count("follower")).order_by("-follower_count")
-    json_out = encode_json(prbs.values('id', 'title', 'description', 'follower_count','owner','hashtag'))
+    json_out = encode_json(prbs.values('id', 'title', 'description', 'follower_count', 'owner', 'hashtag'))
     for obj in json_out:
-        obj['img'] = User.objects.get(pk=obj['owner']).get_profile().get_image_data_uri()
+        user = User.objects.get(pk=obj['owner'])
+        obj['owner'] = model_to_dict(user, fields=['usermame', 'id', 'email'])
+        obj['owner']['img'] = user.get_profile().get_image_data_uri()
+        obj['owner']['skills'] = encode_json(user.get_profile().skills.values())
     return json_out
 
 
