@@ -128,4 +128,4 @@ def search_problem_from_position(request):
 def search_problem_from_hashtag(request):
     json_in =json.loads(json.dumps(request.POST))
     skills = json_in['hashtag'].split(',')
-    return encode_json(Project.objects.filter(skill__title__in=skills).values())
+    return encode_json(Problem.objects.filter(reduce(operator.or_, (Q(hashtag=x) for x in skills))).values())
