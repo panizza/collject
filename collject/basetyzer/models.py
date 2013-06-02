@@ -60,10 +60,10 @@ class Project(models.Model):
     solution = models.ForeignKey(Solution)
     user = models.ForeignKey(User)
     follower = models.ManyToManyField(User, related_name="projectfollower", default=[], blank=True)
-
+    
+    @property
     def _get_city(self):
         return get_city_names(self.latitude,self.longitude)
-    city = property(_get_city)
 
     def __unicode__(self):
         return "%s" % self.title
