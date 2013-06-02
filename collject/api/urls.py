@@ -11,9 +11,11 @@ urlpatterns = patterns('api.views',
                        url(r'^project/(?P<project_id>\d+)/info/$', 'get_project_info', name='get_project_info'),
                        url(r'^project/(?P<project_id>\d+)/follower/$', 'list_follower_of_project', name='list_follower_of_project'),
                        url(r'^project/search/$', 'search_project_from_skill', name='search_project_from_skill'),
+                       url(r'^project/search/$', 'search_project_from_position', name='search_project_from_position'),
 
                        url(r'^solution/list/$', 'list_solution', name='list_solution'),
                        url(r'^solution/(?P<solution_id>\d+)/info/$', 'get_solution_info', name='get_solution_info'),
                        url(r'^solution/(?P<solution_id>\d+)/follower/$', 'list_follower_of_solution', name='list_follower_of_solution'),
+
 )
 
