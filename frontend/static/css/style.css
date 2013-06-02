@@ -5,7 +5,8 @@
 
 @font-face {
     font-family: 'Entypo';
-    src: url(./Entypo.otf);
+    src: url(./Entypo.otf),
+         url(Entypo.ttf);
 }
 
 @font-face {
