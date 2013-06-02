@@ -29,7 +29,7 @@ $(document).ready(function(){
         $(this).addClass("active");
     });
     
-    $('.list section span.icon').on(event, function (e) {
-        $(this).toggleClass("follow");
+    $('span.follow').on(event, function (e) {
+        $(this).toggleClass("active");
     });
 });

@@ -210,41 +210,52 @@ section {
 
 section aside {
 	float: left;
-    margin-right: 1.2em;
 }
 
 .list > section {
-    margin: 1.6em 0;
+    margin: 1.6rem 0;
     width: 100%;
 }
 
-.list section aside.img {
-    border: 0.2em solid #384F66;
-	border-radius: 5em;
+.details > section {
+    margin: 1.6rem 0 0;
+    width: 100%;
+}
+
+section aside.img {
+    border: 0.2rem solid #384F66;
+	border-radius: 5rem;
     overflow: hidden;
+    margin-right: 1.2rem;
 }
 
-.list section aside img {
+section aside img {
 	float: left;
-	width: 5em;
-	height: 5em;
+	width: 5rem;
+	height: 5rem;
 }
 
-.list section h2 {
+section aside.icon {
+    font-size: 6rem;
+    color: #384F66;
+}
+
+section h2 {
 	font-family: AvenirNext-Regular;
-	font-size: 2.4em;
+	font-size: 2.4rem;
 	margin: 0;
 	font-weight: normal;
 	color: #384F66;
 }
 
-.list section span {
+section span {
 	font-family: 'Varela', sans-serif;
-	font-size: 1.2em;
 	color: #BDC3C7;
+    width: 100%;
+    float: left;
 }
 
-.list section span.icon {
+section span.icon {
     float: right;
     color: #ECF0F1;
     font-size: 4.4rem;
@@ -252,14 +263,99 @@ section aside {
     transition: 0.5s;
 }
 
-.list section .icon:active {
+section .follow:active {
     color: #BDC3C7;
 }
 
-.list section .icon.follow {
+section span.active {
     color: #3E7300;
 }
 
-/*.list {
+.list {
     display: none;
-}*/
+}
+
+.info > section {
+    width: 100%;
+}
+
+.info section h3 {
+    font-family: AvenirNext-Regular;
+	font-size: 1.8rem;
+	margin: 0.8rem 0 0;
+	font-weight: normal;
+	color: #384F66;
+}
+
+.info aside.icon {
+    font-size: 4rem;
+    height: 2rem;
+}
+
+.info section aside.img {
+    border: 0.1rem solid #384F66;
+    margin: 1rem 1.1rem 0;
+}
+
+.info section aside img {
+	width: 2rem;
+	height: 2rem;
+}
+
+.descr {
+    font-family: AvenirNext-Regular;
+    font-size: 1.2rem;
+    color: #BDC3C7;
+    line-height: 1.45em;
+    text-align: justify;
+    float: left;
+    margin: 1.5rem 0;
+}
+
+.button {
+	background: #46637F;
+	font-family: 'Varela', sans-serif;
+	float: left;
+	color: white;
+	margin: 0 0 1.2rem;
+	font-size: 1.8rem;
+}
+
+.button span {
+	padding: 0.75rem 0;
+	float: left;
+	text-align: center;
+	width: 10rem;
+}
+
+.big {
+	width: 100%;
+}
+
+.right {
+	float: right;
+}
+
+.big span {
+	font-size: 2.4rem;
+	width: 100%;
+	padding: 0.65rem 0;
+}
+
+.button .rectangle {
+	width: 4.4rem;
+    height: 2.9rem;
+    padding: 0.75rem 0;
+    float: right;
+    background-color: #BDC3C7;
+    text-align: center;
+}
+
+hr {
+	float: left;
+	width: 100%;
+	height: 0.2rem;
+	background-color: #ECF0F1;
+	border: none;
+	margin: 0;
+}
