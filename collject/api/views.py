@@ -91,9 +91,9 @@ def list_follower_of_problem(request, problem_id):
 @ajax(require="POST")
 @csrf_exempt
 def search_project_from_skill(request):
-    print request.POST
-    print json.loads(json.dumps(request.POST))
-    skills = ['carpentiere', 'JAVA']
+    json_in =json.loads(json.dumps(request.POST))
+    skills = json_in['skill']
+    print skills
     return encode_json(Project.objects.filter(skill__title__in=skills).values())
 
 
