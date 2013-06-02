@@ -16,7 +16,7 @@ import requests
 @ajax(require="GET")
 def list_problem(request):
     prbs = Problem.objects.annotate(follower_count=Count("follower")).order_by("-follower_count")
-    json_out = encode_json(prbs.values('id', 'title', 'description', 'follower_count','owner'))
+    json_out = encode_json(prbs.values('id', 'title', 'description', 'follower_count','owner','hashtag'))
     for obj in json_out:
         obj['img'] = User.objects.get(pk=obj['owner']).get_profile().get_image_data_uri()
     return json_out
@@ -102,7 +102,6 @@ def list_follower_of_problem(request, problem_id):
 def search_project_from_skill(request):
     json_in =json.loads(json.dumps(request.POST))
     skills = json_in['skill']
-    print skills
     return encode_json(Project.objects.filter(skill__title__in=skills).values())
 
 
@@ -123,3 +122,10 @@ def search_project_from_position(request):
 def search_problem_from_position(request):
     city = request.POST.get('city', None)
     return encode_json(Problem.objects.filter(city=city).values()) if city else encode_json([])
+
+@ajax(require="POST")
+@csrf_exempt
+def search_problem_from_hashtag(request):
+    json_in =json.loads(json.dumps(request.POST))
+    skills = json_in['hashtag'].split(',')
+    return encode_json(Project.objects.filter(skill__title__in=skills).values())

@@ -13,6 +13,7 @@ class Problem(models.Model):
     creation_date = models.DateTimeField(auto_now_add=True)
     follower = models.ManyToManyField(User, related_name="problemfollower", default=[],blank=True)
     city =models.TextField(null=True,blank=True)
+    hashtag = models.TextField(null=True,blank=True)
 
     class Meta:
         get_latest_by = "creation_date"
