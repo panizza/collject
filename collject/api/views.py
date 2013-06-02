@@ -10,7 +10,7 @@ from .helpers import encode_json, _my_json_encoder, get_city_names
 from django.views.decorators.csrf import csrf_exempt
 import json
 import requests
-import operator
+
 
 
 @ajax(require="GET")
@@ -43,10 +43,14 @@ def list_project(request):
     prjs = Project.objects.annotate(follower_count=Count("follower")).order_by("-follower_count").values()
     json_out = encode_json(prjs.values('id', 'title', 'user', 'description', 'follower_count', 'creation_date', 'latitude', 'longitude'))
     for obj in json_out:
+<<<<<<< HEAD
+        obj['img'] = User.objects.get(pk=obj['user']).get_profile().get_image_url()
+=======
         user = User.objects.get(pk=obj['user'])
         obj['user'] = model_to_dict(user, fields=['usermame', 'id', 'email'])
         obj['user']['img'] = user.get_profile().get_image_data_uri()
         obj['user']['skills'] = encode_json(user.get_profile().skills.values())
+>>>>>>> 54c14486518db899721bd0eca0cfc7caa9a3e8c0
     return json_out
 
 
@@ -59,6 +63,9 @@ def get_project_info(request, project_id):
 @ajax(require="GET")
 def list_solution(request):
     sols = Solution.objects.annotate(follower_count=Count("follower")).order_by("-follower_count")
+<<<<<<< HEAD
+    return encode_json(sols.values('id', 'problem_id', 'description', 'follower_count', 'creation_date'))
+=======
     json_out = encode_json(sols.values('id', 'problem_id', 'user', 'description', 'follower_count', 'creation_date'))
     for obj in json_out:
         user = User.objects.get(pk=obj['user'])
@@ -67,6 +74,7 @@ def list_solution(request):
         obj['user']['img'] = user.get_profile().get_image_data_uri()
         obj['user']['skills'] = encode_json(user.get_profile().skills.values())
     return json_out
+>>>>>>> 54c14486518db899721bd0eca0cfc7caa9a3e8c0
 
 
 @ajax(require="GET")
@@ -80,6 +88,9 @@ def get_solution_info(request, solution_id):
 def list_my_project(request):
     user = get_object_or_404(User, pk=request.user.id)
     prjs = Project.objects.filter(Q(user=user)|Q(follower__in=[user]))
+<<<<<<< HEAD
+    return encode_json(prjs.values('id', 'title', 'description', 'follower_count', 'creation_date'))
+=======
     json_out = encode_json(prjs.values('id', 'title', 'user', 'description', 'follower_count', 'creation_date', 'latitude', 'longitude'))
     for obj in json_out:
         user = User.objects.get(pk=obj['user'])
@@ -87,6 +98,7 @@ def list_my_project(request):
         obj['user']['img'] = user.get_profile().get_image_data_uri()
         obj['user']['skills'] = encode_json(user.get_profile().skills.values())
     return json_out
+>>>>>>> 54c14486518db899721bd0eca0cfc7caa9a3e8c0
 
 
 @ajax(require="GET")
@@ -115,6 +127,7 @@ def list_follower_of_problem(request, problem_id):
 def search_project_from_skill(request):
     json_in =json.loads(json.dumps(request.POST))
     skills = json_in['skill']
+    print skills
     return encode_json(Project.objects.filter(skill__title__in=skills).values())
 
 
@@ -135,10 +148,3 @@ def search_project_from_position(request):
 def search_problem_from_position(request):
     city = request.POST.get('city', None)
     return encode_json(Problem.objects.filter(city=city).values()) if city else encode_json([])
-
-@ajax(require="POST")
-@csrf_exempt
-def search_problem_from_hashtag(request):
-    json_in =json.loads(json.dumps(request.POST))
-    skills = json_in['hashtag'].split(',')
-    return encode_json(Problem.objects.filter(reduce(operator.or_, (Q(hashtag__startswith=x) for x in skills))).values())

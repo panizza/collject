@@ -1,0 +1,259 @@
+* {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+}
+
+@font-face {
+    font-family: 'Entypo';
+    src: url(./Entypo.otf);
+}
+
+@font-face {
+    font-family: 'Varela';
+    src: url(./Varela.ttf);
+}
+
+html,
+body {
+    -webkit-overflow-scrolling: touch;
+    float: left;
+    font-size: 10px;
+    height: 100%;
+    margin: 0;
+    overflow: auto;
+    width: 100%;
+}
+
+.icon {
+    font-family: 'Entypo' !important;
+    font-size: 4.4rem;
+    width: 4.4rem;
+    text-align: center;
+    float: left;
+}
+
+header {
+    background-color: #384F66;
+    float: left;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+}
+
+header #top {
+	background-color: #46637F;
+	height: 1.2rem;
+	width: 100%;
+	font-size: 1.2rem;
+	margin: 0;
+	padding: 0.3rem 0 0.7rem;
+	float: left;
+	text-align: center;
+	color: white;
+    font-family: 'Varela', sans-serif;
+	box-shadow: 0 -0.2rem 0.2rem 0 rgba(0, 0, 0, 0.5) inset;
+}
+
+header #bottom {
+    height: 4.4em;
+    float: left;
+    width: 100%;
+}
+
+header #bottom .rectangle {
+    width: 4.4rem;
+    height: 4.4rem;
+    float: left;
+}
+
+header #bottom #back.rectangle {
+    background-color: #BDC3C7;
+    color: #384F66;
+    box-shadow: 0 -0.4rem 0.3rem -0.2rem rgba(0, 0, 0, 0.5) inset;
+}
+
+header #bottom #search.rectangle {
+    background-color: #ECF0F1;
+    color: #384F66;
+    box-shadow: 0 -0.4rem 0.3rem -0.2rem rgba(0, 0, 0, 0.5) inset;
+}
+
+header #bottom #add.rectangle {
+    background-color: #FFF;
+    color: #46637F;
+    box-shadow: 0 -0.4rem 0.3rem -0.2rem rgba(0, 0, 0, 0.5) inset;
+}
+
+header #bottom nav ul {
+    float: left;
+    padding: 0;
+    margin: 0;
+    height: 4.4rem;
+    width: -webkit-calc(100% - 13.2rem);
+    width: calc(100% - 13.2rem);
+    position: relative;
+}
+
+header #bottom nav ul li {
+    float: left;
+    height: 0rem;
+    width: 100%;
+    font-size: 2.4rem;
+    font-family: AvenirNext-Regular;
+    color: #ECF0F1;
+    background-color: #384F66;
+    overflow: hidden;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    box-shadow: 0 -0.2rem 0.2rem 0 rgba(0, 0, 0, 0.5) inset;
+}
+
+header #bottom nav ul li:active {
+    color: #384F66;
+    background-color: #ECF0F1;
+    overflow: hidden;
+}
+
+header #bottom nav ul li:active span.icon {
+    color: #384F66;
+}
+
+header #bottom nav ul li.active, header #bottom nav ul.open li {
+    height: 4.4rem;
+}
+
+header #bottom nav ul.open li {
+    box-shadow: none;
+}
+
+header #bottom nav ul li span.text {
+    padding: .8rem 0 0;
+    float: left;
+    height: 3.6rem;
+    width: 14.4rem;
+}
+
+header #bottom nav ul #drop.icon {
+    float: left;
+    height: 4.4rem;
+    position: absolute;
+    color: #BDC3C7;
+    right: 0;
+}
+
+.scrollable {
+    -webkit-overflow-scrolling: touch;
+    float: left;
+    height: 100%;
+    overflow: auto;
+    width: 100%;
+}
+
+#content {
+    overflow: hidden;
+    padding: 6.6rem 1.2rem;
+    min-height: -webkit-calc(100% - 13.1rem);
+    min-height: calc(100% - 13.1rem);
+}
+
+footer {
+    background-color: #ECF0F1;
+    height: 4.9rem;
+    bottom: 0;
+    position: absolute;
+    width: 100%;
+    z-index: 100;
+    overflow: hidden;
+}
+
+footer ul {
+    
+    text-align: center;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+footer ul li.icon {
+    font-size: 5em;
+    width: 25%;
+    color: #384F66;
+    box-shadow: 0 0.4rem 0.3rem -0.2rem rgba(0, 0, 0, 0.5) inset;
+    list-style: none;
+}
+
+footer ul li:active {
+    background-color: #384F66;
+    color: #ECF0F1;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+}
+
+footer ul li.active {
+    background-color: #FFF;
+    color: #46637F;
+    box-shadow: 0.4rem 0.1rem 0.3rem -0.2rem rgba(0, 0, 0, 0.5), -0.4rem 0.1rem 0.3rem -0.2rem rgba(0, 0, 0, 0.5);
+}
+
+
+
+
+
+
+
+section {
+	float: left;
+}
+
+section aside {
+	float: left;
+    margin-right: 1.2em;
+}
+
+.list > section {
+    margin: 1.6em 0;
+    width: 100%;
+}
+
+.list section aside.img {
+    border: 0.2em solid #384F66;
+	border-radius: 5em;
+    overflow: hidden;
+}
+
+.list section aside img {
+	float: left;
+	width: 5em;
+	height: 5em;
+}
+
+.list section h2 {
+	font-family: AvenirNext-Regular;
+	font-size: 2.4em;
+	margin: 0;
+	font-weight: normal;
+	color: #384F66;
+}
+
+.list section span {
+	font-family: 'Varela', sans-serif;
+	font-size: 1.2em;
+	color: #BDC3C7;
+}
+
+.list section span.icon {
+    float: right;
+    color: #ECF0F1;
+    font-size: 4.4rem;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+}
+
+.list section .icon:active {
+    color: #BDC3C7;
+}
+
+.list section .icon.follow {
+    color: #3E7300;
+}

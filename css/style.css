@@ -8,7 +8,10 @@
     src: url(./Entypo.otf);
 }
 
-@import url(http://fonts.googleapis.com/css?family=Varela);
+@font-face {
+    font-family: 'Varela';
+    src: url(./Varela.ttf);
+}
 
 html,
 body {
@@ -22,7 +25,7 @@ body {
 }
 
 .icon {
-    font-family: 'Entypo';
+    font-family: 'Entypo' !important;
     font-size: 4.4rem;
     width: 4.4rem;
     text-align: center;
@@ -150,7 +153,8 @@ header #bottom nav ul #drop.icon {
 #content {
     overflow: hidden;
     padding: 6.6rem 1.2rem;
-    min-height: 100%;
+    min-height: -webkit-calc(100% - 13.1rem);
+    min-height: calc(100% - 13.1rem);
 }
 
 footer {
@@ -204,16 +208,52 @@ section {
 
 section aside {
 	float: left;
+    margin-right: 1.2em;
 }
 
-section aside img {
+.list > section {
+    margin: 1.6em 0;
+    width: 100%;
+}
+
+.list section aside.img {
+    border: 0.2em solid #384F66;
+	border-radius: 5em;
+    overflow: hidden;
+}
+
+.list section aside img {
 	float: left;
 	width: 5em;
 	height: 5em;
-	border: 0.2em solid #384F66;
-	border-radius: 5em;
 }
 
-section h2 {
+.list section h2 {
+	font-family: AvenirNext-Regular;
+	font-size: 2.4em;
+	margin: 0;
+	font-weight: normal;
+	color: #384F66;
+}
+
+.list section span {
 	font-family: 'Varela', sans-serif;
+	font-size: 1.2em;
+	color: #BDC3C7;
+}
+
+.list section span.icon {
+    float: right;
+    color: #ECF0F1;
+    font-size: 4.4rem;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+}
+
+.list section .icon:active {
+    color: #BDC3C7;
+}
+
+.list section .icon.follow {
+    color: #3E7300;
 }
