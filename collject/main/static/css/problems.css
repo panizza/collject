@@ -3,9 +3,15 @@
     -moz-user-select: none;
 }
 
+input, textarea {
+    -webkit-user-select: text;
+    -moz-user-select: text;
+}
+
 @font-face {
     font-family: 'Entypo';
-    src: url(./Entypo.otf);
+    src: url(./Entypo.otf),
+         url(Entypo.ttf);
 }
 
 @font-face {
@@ -33,7 +39,7 @@ body {
 }
 
 header {
-    background-color: #384F66;
+    background-color: #752929;
     float: left;
     position: absolute;
     top: 0;
@@ -42,7 +48,7 @@ header {
 }
 
 header #top {
-	background-color: #46637F;
+	background-color: #913334;
 	height: 1.2rem;
 	width: 100%;
 	font-size: 1.2rem;
@@ -69,19 +75,19 @@ header #bottom .rectangle {
 
 header #bottom #back.rectangle {
     background-color: #BDC3C7;
-    color: #384F66;
+    color: #752929;
     box-shadow: 0 -0.4rem 0.3rem -0.2rem rgba(0, 0, 0, 0.5) inset;
 }
 
 header #bottom #search.rectangle {
     background-color: #ECF0F1;
-    color: #384F66;
+    color: #752929;
     box-shadow: 0 -0.4rem 0.3rem -0.2rem rgba(0, 0, 0, 0.5) inset;
 }
 
 header #bottom #add.rectangle {
     background-color: #FFF;
-    color: #46637F;
+    color: #913334;
     box-shadow: 0 -0.4rem 0.3rem -0.2rem rgba(0, 0, 0, 0.5) inset;
 }
 
@@ -103,7 +109,7 @@ header #bottom nav ul li {
     font-size: 2.4rem;
     font-family: AvenirNext-Regular;
     color: #ECF0F1;
-    background-color: #384F66;
+    background-color: #752929;
     overflow: hidden;
     -webkit-transition: 0.5s;
     transition: 0.5s;
@@ -111,13 +117,13 @@ header #bottom nav ul li {
 }
 
 header #bottom nav ul li:active {
-    color: #384F66;
+    color: #752929;
     background-color: #ECF0F1;
     overflow: hidden;
 }
 
 header #bottom nav ul li:active span.icon {
-    color: #384F66;
+    color: #752929;
 }
 
 header #bottom nav ul li.active, header #bottom nav ul.open li {
@@ -179,13 +185,13 @@ footer ul {
 footer ul li.icon {
     font-size: 5em;
     width: 25%;
-    color: #384F66;
+    color: #752929;
     box-shadow: 0 0.4rem 0.3rem -0.2rem rgba(0, 0, 0, 0.5) inset;
     list-style: none;
 }
 
 footer ul li:active {
-    background-color: #384F66;
+    background-color: #752929;
     color: #ECF0F1;
     -webkit-transition: 0.5s;
     transition: 0.5s;
@@ -193,7 +199,7 @@ footer ul li:active {
 
 footer ul li.active {
     background-color: #FFF;
-    color: #46637F;
+    color: #913334;
     box-shadow: 0.4rem 0.1rem 0.3rem -0.2rem rgba(0, 0, 0, 0.5), -0.4rem 0.1rem 0.3rem -0.2rem rgba(0, 0, 0, 0.5);
 }
 
@@ -209,41 +215,79 @@ section {
 
 section aside {
 	float: left;
-    margin-right: 1.2em;
 }
 
-.list > section {
-    margin: 1.6em 0;
+.list > section:active {
+    background-color: #ECF0F1;
+}
+
+.list > section, .details > section, .form > section {
+    margin: 1.6rem 0 0;
     width: 100%;
 }
 
-.list section aside.img {
-    border: 0.2em solid #384F66;
-	border-radius: 5em;
+section aside.img {
+    border: 0.2rem solid #752929;
+	border-radius: 5rem;
     overflow: hidden;
+    margin-right: 1.2rem;
 }
 
-.list section aside img {
+section aside img {
 	float: left;
-	width: 5em;
-	height: 5em;
+	width: 5rem;
+	height: 5rem;
 }
 
-.list section h2 {
+section aside.icon {
+    font-size: 6rem;
+    color: #752929;
+}
+
+section h2 {
 	font-family: AvenirNext-Regular;
-	font-size: 2.4em;
+	font-size: 2.4rem;
 	margin: 0;
 	font-weight: normal;
-	color: #384F66;
+	color: #752929;
 }
 
-.list section span {
-	font-family: 'Varela', sans-serif;
-	font-size: 1.2em;
+.form section > section {
+	width: 80%;
+}
+
+.form section .title {
+	font-family: AvenirNext-Regular;
+	font-size: 2.4rem;
+	margin: 0;
+	font-weight: normal;
 	color: #BDC3C7;
+	border: none;
+	float: left;
+	padding: 0;
 }
 
-.list section span.icon {
+.form section .skills {
+	font-family: 'Varela', sans-serif;
+	color: #ECF0F1;
+    width: 100%;
+    float: left;
+    border: none;
+    padding: 0;
+}
+
+.form section .active {
+	color: #752929;
+}
+
+section span {
+	font-family: 'Varela', sans-serif;
+	color: #BDC3C7;
+    width: 100%;
+    float: left;
+}
+
+section span.icon {
     float: right;
     color: #ECF0F1;
     font-size: 4.4rem;
@@ -251,14 +295,140 @@ section aside {
     transition: 0.5s;
 }
 
-.list section .icon:active {
+section .follow:active {
     color: #BDC3C7;
 }
 
-.list section .icon.follow {
+section span.active {
     color: #3E7300;
 }
 
-/*.list {
+.details, .form {
     display: none;
-}*/
+}
+
+.info > section {
+    width: 100%;
+}
+
+.info section h3 {
+    font-family: AvenirNext-Regular;
+	font-size: 1.8rem;
+	margin: 0.8rem 0 0;
+	font-weight: normal;
+	color: #752929;
+}
+
+.form .info section input {
+    font-family: AvenirNext-Regular;
+	font-size: 1.8rem;
+	margin: 0.8rem 0 0;
+	font-weight: normal;
+	color: #ECF0F1;
+	border: none;
+	padding: 0;
+}
+
+.form .info section input.active {
+	color: #752929;
+}
+
+.info aside.icon {
+    font-size: 4rem;
+    height: 2rem;
+}
+
+.info section aside.img {
+    border: 0.1rem solid #752929;
+    margin: 1rem 1.1rem 0;
+}
+
+.info section aside img {
+	width: 2rem;
+	height: 2rem;
+}
+
+.descr {
+    font-family: AvenirNext-Regular;
+    font-size: 1.2rem;
+    color: #BDC3C7;
+    line-height: 1.45em;
+    text-align: justify;
+    float: left;
+    margin: 1.5rem 0;
+}
+
+textarea.descr {
+	border: 0;
+	resize: none;
+	height: 13.5rem;
+	width: 100%;
+    padding: 0;
+    text-align: left;
+}
+
+textarea.active {
+	color: #BDC3C7;
+}
+
+.button:active {
+	background-color: #BDC3C7;
+	color: #913334;
+}
+
+.button:active .rectangle {
+	color: #FFF;
+	background-color: #913334;
+}
+
+.button {
+	background-color: #913334;
+	font-family: 'Varela', sans-serif;
+	float: left;
+	color: white;
+	margin: 0 0 1.2rem;
+	font-size: 1.8rem;
+}
+
+.button span {
+	padding: 0.75rem 0;
+	float: left;
+	text-align: center;
+	width: 10rem;
+}
+
+.big {
+	width: 100%;
+}
+
+.right {
+	float: right;
+}
+
+.big span {
+	font-size: 2.4rem;
+	width: 100%;
+	padding: 0.65rem 0;
+}
+
+.button .rectangle {
+	width: 4.4rem;
+    height: 2.9rem;
+    padding: 0.75rem 0;
+    float: right;
+    background-color: #BDC3C7;
+    text-align: center;
+}
+
+hr {
+	float: left;
+	width: 100%;
+	height: 0.2rem;
+	background-color: #ECF0F1;
+	border: none;
+	margin: 0;
+}
+
+.details .list {
+	display: block;
+}
