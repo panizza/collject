@@ -19,7 +19,7 @@ def list_problem(request):
     json_out = encode_json(prbs.values('id', 'title', 'description', 'follower_count', 'owner', 'hashtag'))
     for obj in json_out:
         user = User.objects.get(pk=obj['owner'])
-        obj['owner'] = model_to_dict(user, fields=['usermame', 'id', 'email'])
+        obj['owner'] = model_to_dict(user, fields=['username', 'id', 'email'])
         obj['owner']['img'] = user.get_profile().get_image_data_uri()
         obj['owner']['skills'] = encode_json(user.get_profile().skills.values())
     return json_out
@@ -44,7 +44,7 @@ def list_project(request):
     json_out = encode_json(prjs.values('id', 'title', 'user', 'description', 'follower_count', 'creation_date', 'latitude', 'longitude'))
     for obj in json_out:
         user = User.objects.get(pk=obj['user'])
-        obj['user'] = model_to_dict(user, fields=['usermame', 'id', 'email'])
+        obj['user'] = model_to_dict(user, fields=['username', 'id', 'email'])
         obj['user']['img'] = user.get_profile().get_image_data_uri()
         obj['user']['skills'] = encode_json(user.get_profile().skills.values())
     return json_out
@@ -63,7 +63,7 @@ def list_solution(request):
     for obj in json_out:
         user = User.objects.get(pk=obj['user'])
         print user
-        obj['user'] = model_to_dict(user, fields=['usermame', 'id', 'email'])
+        obj['user'] = model_to_dict(user, fields=['username', 'id', 'email'])
         obj['user']['img'] = user.get_profile().get_image_data_uri()
         obj['user']['skills'] = encode_json(user.get_profile().skills.values())
     return json_out
@@ -79,7 +79,7 @@ def get_solution_info(request, solution_id):
 @ajax(require="GET")
 def list_my_project(request):
     user = get_object_or_404(User, pk=request.user.id)
-    prjs = Project.objects.filter(Q(user=user)|Q(follower__in=[user]))
+    prjs = Project.objects.filter(Q(user=user) | Q(follower__in=[user]))
     json_out = encode_json(prjs.values('id', 'title', 'user', 'description', 'follower_count', 'creation_date', 'latitude', 'longitude'))
     for obj in json_out:
         user = User.objects.get(pk=obj['user'])
