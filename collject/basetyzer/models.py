@@ -64,6 +64,7 @@ class Project(models.Model):
     @property
     def _get_city(self):
         return get_city_names(self.latitude,self.longitude)
+    city = property(_get_city)
 
     def __unicode__(self):
         return "%s" % self.title
