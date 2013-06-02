@@ -145,3 +145,9 @@ def search_project_from_position(request):
 def search_problem_from_position(request):
     city = request.POST.get('city', None)
     return encode_json(Problem.objects.filter(city=city).values()) if city else encode_json([])
+
+
+@ajax(require="GET")
+def image_from_user(request, user_id):
+    user = get_object_or_404(User, pk=user_id)
+    return {'img':user.get_profile().get_image_data_uri()}

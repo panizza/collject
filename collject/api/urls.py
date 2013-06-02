@@ -19,5 +19,7 @@ urlpatterns = patterns('api.views',
                        url(r'^solution/(?P<solution_id>\d+)/info/$', 'get_solution_info', name='get_solution_info'),
                        url(r'^solution/(?P<solution_id>\d+)/follower/$', 'list_follower_of_solution', name='list_follower_of_solution'),
 
+                       url(r'^user/(?P<user_id>\d+)/$', 'image_from_user', name='image_from_user'),
+
 )
 
