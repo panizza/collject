@@ -60,7 +60,7 @@ class Project(models.Model):
     solution = models.ForeignKey(Solution)
     user = models.ForeignKey(User)
     follower = models.ManyToManyField(User, related_name="projectfollower", default=[], blank=True)
-    city =''
+    city =models.TextField()
 
     def save(self):
         self.city = get_city_names(self.latitude,self.longitude)
