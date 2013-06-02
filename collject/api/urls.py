@@ -6,6 +6,7 @@ urlpatterns = patterns('api.views',
                        url(r'^problem/(?P<problem_id>\d+)/info/$', 'get_problem_info', name='get_problem_info'),
                        url(r'^problem/(?P<problem_id>\d+)/solution/$', 'get_solution_of_problem', name='get_solution_of_problem'),
                        url(r'^problem/(?P<problem_id>\d+)/follower/$', 'list_follower_of_problem', name='list_follower_of_problem'),
+                       url(r'^problem/psearch/$', 'search_problem_from_position', name='search_problem_from_position'),
 
                        url(r'^project/list/$', 'list_project', name='list_project'),
                        url(r'^project/(?P<project_id>\d+)/info/$', 'get_project_info', name='get_project_info'),
