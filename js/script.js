@@ -28,4 +28,8 @@ $(document).ready(function(){
         $("footer .active").removeClass("active");
         $(this).addClass("active");
     });
+    
+    $('.list section span.icon').on(event, function (e) {
+        $(this).toggleClass("follow");
+    });
 });
