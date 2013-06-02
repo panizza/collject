@@ -49,7 +49,7 @@ def get_project_info(request, project_id):
 
 @ajax(require="GET")
 def list_solution(request):
-    sols = Solution.objects.annotate(follower_count=Count("follower")).order_by("-follower_count").values()
+    sols = Solution.objects.annotate(follower_count=Count("follower")).order_by("-follower_count")
     return encode_json(sols.values('id', 'problem_id', 'description', 'follower_count', 'creation_date'))
 
 
